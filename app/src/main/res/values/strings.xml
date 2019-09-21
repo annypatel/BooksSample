@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Books</string>
+    <string name="menu_sort_by">Sort by</string>
+    <string name="menu_sort_by_name">Name</string>
+    <string name="menu_sort_by_week">Week</string>
+    <string name="error_generic">Uh-oh. An error has occurred. Please try again.</string>
+</resources>

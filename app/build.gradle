@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion buildConfig.compileSdk
+    defaultConfig {
+        applicationId "sample.books"
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        versionCode buildConfig.versionCode
+        versionName buildConfig.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        mock {
+            dimension "default"
+        }
+        prod {
+            dimension "default"
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if (variant.buildType.name == 'release'
+            && variant.getFlavors().get(0).name == 'mock') {
+            variant.setIgnore(true)
+        }
+    }
+}
+
+dependencies {
+    implementation deps.kotlin
+
+    implementation deps.appcompat
+    implementation deps.activity
+    implementation deps.viewModel
+    implementation deps.recyclerView
+    implementation deps.material
+
+    implementation deps.dagger.runtime
+    kapt deps.dagger.compiler
+    implementation deps.dagger.androidRuntime
+    kapt deps.dagger.androidCompiler
+
+    implementation deps.rx.kotlin
+    implementation deps.rx.android
+
+    implementation deps.room.runtime
+    implementation deps.room.rx
+    kapt deps.room.compiler
+
+    implementation deps.retrofit.runtime
+    implementation deps.retrofit.rxAdapter
+    implementation deps.retrofit.gsonConverter
+
+    implementation deps.picasso
+    implementation deps.threeten
+    implementation deps.timber
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.lifecycle
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
+
+    androidTestUtil deps.test.orchestrator
+    androidTestImplementation deps.test.mockitoAndroid
+    androidTestImplementation deps.test.mockitoKotlin
+    androidTestImplementation deps.test.core
+    androidTestImplementation deps.test.rules
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.lifecycle
+    androidTestImplementation deps.test.espresso.core
+    androidTestImplementation deps.test.espresso.rxidler
+    kaptAndroidTest deps.dagger.compiler
+    kaptAndroidTest deps.dagger.androidCompiler
+}

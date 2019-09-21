@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/spacing_large"
+    android:paddingEnd="@dimen/spacing_large"
+    android:paddingBottom="@dimen/spacing_large"
+    tools:ignore="RtlSymmetry">
+
+    <ImageView
+        android:id="@+id/coverImageView"
+        android:layout_width="@dimen/book_thumb_width"
+        android:layout_height="@dimen/book_thumb_height"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/authorTextView"
+            style="@style/Widget.BookAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            tools:text="A very good Author" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            style="@style/Widget.BookTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="A very good title" />
+
+    </LinearLayout>
+</LinearLayout>

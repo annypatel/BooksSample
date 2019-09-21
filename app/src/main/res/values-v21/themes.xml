@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="Theme.Base" parent="Theme.MaterialComponents.Light">
+        <item name="android:navigationBarColor">@color/primary_dark</item>
+    </style>
+
+</resources>
